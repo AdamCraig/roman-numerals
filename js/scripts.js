@@ -59,6 +59,32 @@ $("form").submit(function(event) {
               romanNumeral.push(ones[index]);
             }
           }
+          // IF INPUTTED NUMBER HAS FOUR DIGITS...
+
+      } else if (workingNumber.length === 4){
+          for (index = 0; index < thousandths.length; index++) {
+            if (thousandthsPlace === index) {
+              romanNumeral.push(thousandths[index]);
+            }
+          }
+
+          for(index = 0; index < hundreds.length; index++) {
+            if(hundredsPlace === index) {
+              romanNumeral.push(hundreds[index]);
+            }
+          }
+
+          for(index = 0; index < tens.length; index++) {
+            if (tensPlace === index) {
+              romanNumeral.push(tens[index]);
+            }
+          }
+
+          for(index = 0; index < ones.length; index++) {
+            if (onesPlace === index ) {
+              romanNumeral.push(ones[index]);
+            }
+          }
 
       } else {
          alert("Not Implemented Yet");
