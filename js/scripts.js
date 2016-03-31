@@ -1,6 +1,7 @@
+
 $(document).ready(function() {
 
-$("form").submit(function(event) {
+  var romanTranslate = function (number) {
 
   var ones = ["", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"];
   var tens = ["", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"];
@@ -9,8 +10,7 @@ $("form").submit(function(event) {
 
   var digits = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
-       var arabicNumber = $("#userNumber").val();
-       var workingNumber = arabicNumber.split("").reverse();
+       var workingNumber = number.split("").reverse();
 
        var romanNumeral = [];
 
@@ -19,14 +19,16 @@ $("form").submit(function(event) {
        var hundredsPlace = parseInt( workingNumber[2] );
        var thousandthsPlace = parseInt( workingNumber[3] );
 
-       // IF INPUTTED NUMBER HAS ONE DIGIT
-       if (workingNumber.length === 1) {
+       // IF INPUTTED NUMBER HAS ONE DIGIT...
+       if ( !parseInt(number) ) {
+         alert("Please enter a valid number to convert!");
+       } else if (workingNumber.length === 1) {
          for(index = 0; index < ones.length; index++) {
            if (onesPlace === index ) {
              romanNumeral.push(ones[index]);
            }
          }
-         // IF INPUTTED NUMBER HAS TWO DIGITS
+         // IF INPUTTED NUMBER HAS TWO DIGITS...
        } else if (workingNumber.length === 2) {
           for(index = 0; index < tens.length; index++) {
             if (tensPlace === index) {
@@ -61,7 +63,7 @@ $("form").submit(function(event) {
           }
           // IF INPUTTED NUMBER HAS FOUR DIGITS...
 
-      } else if (workingNumber.length === 4){
+      } else if (workingNumber.length === 4 ) {
           for (index = 0; index < thousandths.length; index++) {
             if (thousandthsPlace === index) {
               romanNumeral.push(thousandths[index]);
@@ -87,13 +89,20 @@ $("form").submit(function(event) {
           }
 
       } else {
+
          alert("Not Implemented Yet");
+
        }
 
-
        romanNumeral = romanNumeral.join("");
-       console.log(romanNumeral);
-       $("#result").text (romanNumeral);
-       event.preventDefault();
+       return romanNumeral;
+    }
+
+    $("form").submit(function(event) {
+      event.preventDefault();
+      var arabicNumber = $("#userNumber").val();
+      var final = romanTranslate(arabicNumber);
+      $("#result").text(final);
+
  });
 });
