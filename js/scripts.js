@@ -3,12 +3,19 @@ $(document).ready(function() {
 
   var romanTranslate = function (number) {
 
+    var validNumber = function(num) {
+      if (num <= 3999) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+
   var ones = ["", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"];
   var tens = ["", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"];
   var hundreds = ["", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"];
   var thousandths = ["", "M", "MM", "MMM"];
 
-  var digits = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
        var workingNumber = number.split("").reverse();
 
@@ -20,7 +27,7 @@ $(document).ready(function() {
        var thousandthsPlace = parseInt( workingNumber[3] );
 
        // IF INPUTTED NUMBER HAS ONE DIGIT...
-       if ( !parseInt(number) ) {
+       if ( !parseInt(number) || !validNumber(number) ) {
          alert("Please enter a valid number to convert!");
        } else if (workingNumber.length === 1) {
          for(index = 0; index < ones.length; index++) {
